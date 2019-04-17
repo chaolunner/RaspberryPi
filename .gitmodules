@@ -7,3 +7,6 @@
 [submodule "Assets/StreamingAssets"]
 	path = Assets/StreamingAssets
 	url = git@github.com:chaolunner/UnityFrameworkStreamingAssets.git
+[submodule "PythonFramework"]
+	path = PythonFramework
+	url = https://github.com/chaolunner/PythonFramework.git
