@@ -5,8 +5,8 @@ using System.Linq;
 
 public class SerialHandler : MonoBehaviour
 {
-    public delegate void SerialDataReceivedEventHandler(string message);
-    public event SerialDataReceivedEventHandler OnDataReceived;
+    public delegate void ReceiveHandlerHandler(string message);
+    public event ReceiveHandlerHandler OnReceived;
 
     public string PortName = "/dev/tty.raspberrypi-SerialPort";
     public int BaudRate = 9600;
@@ -26,9 +26,9 @@ public class SerialHandler : MonoBehaviour
 
     private void Update()
     {
-        if (isNewMessageReceived && OnDataReceived != null)
+        if (isNewMessageReceived && OnReceived != null)
         {
-            OnDataReceived(message);
+            OnReceived(message);
         }
         isNewMessageReceived = false;
     }
@@ -110,17 +110,17 @@ public class SerialHandler : MonoBehaviour
         }
     }
 
-    public void Write(string message)
+    public void Send(string msg)
     {
         if (IsConnected())
         {
             try
             {
-                if (!message.EndsWith(newLine, System.StringComparison.Ordinal))
+                if (!msg.EndsWith(newLine, System.StringComparison.Ordinal))
                 {
-                    message += newLine;
+                    msg += newLine;
                 }
-                serialPort.Write(message);
+                serialPort.Write(msg);
             }
             catch (System.Exception e)
             {

@@ -49,11 +49,11 @@ public class RemoteControlSystem : SystemBehaviour
                 }
                 else if (keycode.KeyCode == KeyCode.LeftArrow)
                 {
-                    direction += Vector2.left;
+                    direction += 0.25f * Vector2.left;
                 }
                 else if (keycode.KeyCode == KeyCode.RightArrow)
                 {
-                    direction += Vector2.right;
+                    direction += 0.25f * Vector2.right;
                 }
                 EventSystem.Publish(new JoystickMessage(direction).ToEvent());
             }).AddTo(this.Disposer).AddTo(keycode.Disposer);
@@ -70,11 +70,11 @@ public class RemoteControlSystem : SystemBehaviour
                 }
                 else if (keycode.KeyCode == KeyCode.LeftArrow)
                 {
-                    direction -= Vector2.left;
+                    direction -= 0.25f * Vector2.left;
                 }
                 else if (keycode.KeyCode == KeyCode.RightArrow)
                 {
-                    direction -= Vector2.right;
+                    direction -= 0.25f * Vector2.right;
                 }
                 EventSystem.Publish(new JoystickMessage(direction).ToEvent());
             }).AddTo(this.Disposer).AddTo(keycode.Disposer);

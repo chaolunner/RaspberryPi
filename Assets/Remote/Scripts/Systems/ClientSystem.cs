@@ -2,19 +2,19 @@
 using UnityEngine;
 using UniRx;
 
-public class SerialSystem : SystemBehaviour
+public class ClientSystem : SystemBehaviour
 {
-    [SerializeField] SerialHandler serialHandler;
+    [SerializeField] SocketClient client;
 
     public override void OnEnable()
     {
         base.OnEnable();
 
-        serialHandler.OnReceived += OnReceived;
+        client.OnReceived += OnReceived;
 
         EventSystem.Receive<SendMessageEvent>().Subscribe(evt =>
         {
-            serialHandler.Send(evt.Message);
+            client.Send(evt.Message);
         }).AddTo(this.Disposer);
     }
 
@@ -22,7 +22,7 @@ public class SerialSystem : SystemBehaviour
     {
         base.OnDisable();
 
-        serialHandler.OnReceived -= OnReceived;
+        client.OnReceived -= OnReceived;
     }
 
     private void OnReceived(string message)
